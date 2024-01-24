@@ -1,0 +1,161 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Movie Recommender System </title>
+      <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+  </head>
+  <style>
+    body {
+    font-family: 'Arial', sans-serif;
+    background-color: #f4f4f4;
+    margin: 0;
+    padding: 0;
+}
+
+.container {
+    max-width: 800px;
+    margin: 50px auto;
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+form-container {
+    text-align: center;
+}
+
+form {
+    width: 50%;
+    margin: 0 auto;
+    text-align: left;
+    margin-bottom: 20px;
+}
+
+label {
+    font-weight: bold;
+    display: block;
+    margin-bottom: 8px;
+}
+
+select {
+    width: 100%;
+    padding: 8px;
+    margin-bottom: 10px;
+}
+
+button {
+    background-color: #4caf50;
+    color: #fff;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+button:hover {
+    background-color: #45a049;
+}
+
+h1, h2 {
+    color: #333;
+}
+
+.selected-movie {
+    margin-top: 20px;
+
+}
+
+.poster-row {
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+}
+
+.movie {
+    width: 23%;
+    margin: 10px;
+    text-align: center;
+}
+
+.movie:hover .poster,
+.movie:hover .movie-name {
+    transform: scale(1.1);
+    transition: transform 0.3s ease-in-out;
+}
+
+.poster, .movie-name {
+    transition: transform 0.3s ease-in-out;
+}
+
+.poster img {
+    max-width: 100%;
+    height: auto;
+    border-radius: 8px;
+}
+
+.movie-name {
+    background-color: #eee;
+    padding: 8px;
+    border-radius: 8px;
+    margin-top: 8px;
+    font-size: 14px;
+}
+
+.movie-name p {
+    margin: 0;
+}
+
+  </style>
+
+  <body class="bg-gray-200">
+   <header class="text-gray-600 body-font -my-8">
+  <div class="container mx-auto flex flex-wrap p-5 flex-col md:flex-row items-center">
+    <a class="flex title-font font-medium items-center text-gray-900 mb-4 md:mb-0">
+      <svg xmlns="http://www.w3.org/2000/svg" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class="w-10 h-10 text-white p-2 bg-green-500 rounded-full" viewBox="0 0 24 24">
+        <path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"></path>
+      </svg>
+     <a href="/"><span class="ml-3 text-xl">Movie Recommender System </span></a>
+    </a>
+    <nav class="md:ml-auto flex flex-wrap items-center text-base justify-center">
+    <a href='/' class="mr-5 hover:text-gray-900">Home</a>
+      <a href='/about' class="mr-5 hover:text-gray-900">About</a>
+      <a href='/contact' class="mr-5 hover:text-gray-900">Contact</a>
+      <a href='/recommendation' class="mr-5 hover:text-gray-900">Recommendation</a>
+    </nav>
+  </div>
+</header>
+      <div class="form-container">
+            <form action="/recommendation" method="POST">
+                <label for="movies">Select a movie:</label>
+                <select name="movies" id="movies" required>
+                    {% for movie in movie_list %}
+                        <option value="{{ movie }}" {% if movie == selected_movie %} selected {% endif %}>{{ movie }}</option>
+                    {% endfor %}
+                </select>
+                <button type="submit">Select</button>
+            </form>
+
+            {% if status %}
+                <div class="selected-movie">
+                    <h2>{{ selected_movie }}</h2>
+                    <div class="poster-row">
+                        {% for i in range(4) %}
+                            <div class="movie">
+                                <img src="{{ recommended_movies_poster[i] }}" alt="{{ recommended_movies_name[i] }}" class="poster">
+                                <div class="movie-name">
+                                    <p>{{ recommended_movies_name[i] }}</p>
+                                </div>
+                            </div>
+                        {% endfor %}
+                    </div>
+                </div>
+            {% endif %}
+        </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
+  </body>
+</html>
