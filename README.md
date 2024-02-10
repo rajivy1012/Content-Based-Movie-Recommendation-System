@@ -1,5 +1,5 @@
 Content-Based Movie Recommendation System
-
+Dataset : https://drive.google.com/drive/folders/1-AIgOz_cfElvzCeqssQqw76XH17L_2-Z?usp=sharing
 Overview:
 
 This project presents a sophisticated content-based movie recommendation system. Departing from traditional collaborative filtering methods, which rely on user-user or item-item similarities, this system focuses on the intrinsic attributes of movies themselves. By analyzing features such as title, genre, cast, crew, and plot summaries, it offers personalized movie recommendations based on user preferences and previously interacted content.
